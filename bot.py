@@ -24,11 +24,11 @@ color_make = [0xD433FF,0xFF3333,0x00FFB4,0xFFD633,0x6FFF33,0x3388FF,0xFF33B1,0xA
 t1 =  0 
 pool = cycle(color_make)
 def save_data(name,speed,word):
-    file = open(r'C:\Users\sagar\Desktop\disco_bot\bot_data.txt','r')
+    file = open(r'C:\....\bot_data.txt','r')
     content = file.readlines()
     content.append(f"{speed}:{name}:{word}\n")
     file.close
-    file=open(r'C:\Users\sagar\Desktop\disco_bot\bot_data.txt','w')
+    file=open(r'C:\...\bot_data.txt','w')
     file.writelines(content)
     file.close
 
