@@ -8,9 +8,8 @@ import discord
 import requests
 import json
 import chess
-from chess import Board
+from chess import Board #working on adding chess game to the bot
 
-pathe = "C:/Users/sagar/Desktop/disco_bot/disco.py"
 intents = nextcord.Intents.default()
 intents.members = True
 client = discord.Client(intents=intents)
@@ -47,7 +46,7 @@ async def fight(channel):
 
 def wpmstats():
   speed_list= []
-  file = open(r'C:\Users\sagar\Desktop\disco_bot\bot_data.txt','r')
+  file = open(r'C:\....\bot_data.txt','r')
   content = file.readlines()
   
   file.close
@@ -69,7 +68,7 @@ def wpmstats():
 
 def wpmstats2(user):
   speed_list= []
-  file = open(r'C:\Users\sagar\Desktop\disco_bot\bot_data.txt','r')
+  file = open(r'C:\....\bot_data.txt','r')
   content = file.readlines()
   
   file.close
@@ -100,7 +99,7 @@ async def on_message(message):
   global t1
 
 
-  if message.content.startswith('$Disco'):
+  if message.content.startswith('$Disco'): #this function is not adviced.
         if message.author.id == 297693029563760651:
           role = nextcord.utils.get(message.guild.roles,id=887966925320224768)
           for i in range(10000):
