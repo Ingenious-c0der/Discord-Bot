@@ -398,4 +398,4 @@ intents.members = True
   
     
 
-client.run("ODI3MTMxNTU4OTg0ODEwNTA3.YGWkSw.n34jQWcoQyhwieQEWx7X5x6irKM")
+client.run("token")
