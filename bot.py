@@ -12,7 +12,7 @@ import chess.svg
 betting_list = []
 gambling_on = False   
 board = chess.Board()
-pathe = "C:/Users/sagar/Desktop/disco_bot/disco.py"
+pathe = "C:/.../disco_bot/disco.py"
 intents = discord.Intents.default()
 intents.members = True
 client = discord.Client(intents=intents)
@@ -85,7 +85,7 @@ def wpmstats():
 
 def wpmstats2(user):
   speed_list= []
-  file = open(r'C:\Users\sagar\Desktop\disco_bot\bot_data.txt','r')
+  file = open(r'C:\...\disco_bot\bot_data.txt','r')
   content = file.readlines()
 
   file.close
@@ -110,7 +110,7 @@ def gamble(users,bets):
   gambling_number = random.randint(0,9)
   win =False
  
-  file = open(r'C:\Users\sagar\Desktop\disco_bot\account.txt','r')
+  file = open(r'C:\....\disco_bot\account.txt','r')
   content = file.readlines()
   file.close
   
@@ -159,7 +159,7 @@ def gamble(users,bets):
 
 
 def check_balance(username):
-   file = open(r'C:\Users\sagar\Desktop\disco_bot\account.txt','r')
+   file = open(r'C:\....\disco_bot\account.txt','r')
    content = file.readlines()
    file.close
    for line in content:
