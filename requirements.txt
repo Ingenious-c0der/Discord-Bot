@@ -1,0 +1,7 @@
+discord.py
+python-dotenv
+motor
+dnspython
+ssl
+nums-from-string
+discord-components
