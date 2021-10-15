@@ -5,8 +5,10 @@ from pymongo import cursor
 import motor 
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
 import random 
-
-Mongo_Client =motor.motor_asyncio.AsyncIOMotorClient(r"mongodb+srv://<username:password>@botdata.si3ce.mongodb.net/Bot_data?retryWrites=true&w=majority",ssl_cert_reqs=ssl.CERT_NONE, serverSelectionTimeoutMS=5000)
+from dotenv import load_dotenv
+import os 
+load_dotenv()
+Mongo_Client =motor.motor_asyncio.AsyncIOMotorClient(fr"{os.environ.get('CONNECTION_STRING')}",ssl_cert_reqs=ssl.CERT_NONE, serverSelectionTimeoutMS=5000)
 db = Mongo_Client.get_database('Bot_data')
 
 
@@ -67,7 +69,7 @@ class WpmStats:
         top_list =  [i async for i in top_cursor][0:5]
         return top_list
     
-    async def get_wpm_leaderbaord_local(guild_id)->list:
+    async def get_wpm_leaderboard_local(guild_id)->list:
         """
         Function to get local (server) leaderboard of WpmStats
 
@@ -128,4 +130,5 @@ class Words:
             words_raw = await Words.words.find_one({"word_list_id":1})
             Words.word_list = words_raw["words"]
         return random.choice(Words.word_list)
+
 
