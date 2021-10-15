@@ -1,7 +1,6 @@
 from discord.ext import commands
 import random 
 import time
-from nextcord.ext import commands
 import discord
 import nums_from_string
 from discord_components import Button,ButtonStyle,DiscordComponents 
