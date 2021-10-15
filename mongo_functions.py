@@ -1,7 +1,4 @@
-from nextcord.abc import T
-import pymongo
 import ssl
-from pymongo import cursor
 import motor 
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
 import random 
