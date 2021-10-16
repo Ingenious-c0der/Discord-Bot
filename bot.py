@@ -374,7 +374,7 @@ class Bot(commands.Bot):
       em = discord.Embed(title= "Ask for a choice",description= "Do you want the answer to a yes/no type question the whole day? Now is your chance to ask it! ",color = 0x4e23c4)
       em.add_field(name = "Syntax",value = "```$choice <yes/no question>```",inline = False)
       em.add_field(name = "Example",value = "```$choice Should I go to university today?```",inline= False)
-      em.add_field(name = "Warning",value = "The outcomes of this are random i.e. either yes/no .Please do not consider taking any important decisions based on this, the bot nor its owner is not responsible in such cases.")
+      em.add_field(name = "Warning",value = "The outcomes of this are random i.e. either yes/no .Please do not consider taking any important decisions based on this, neither the bot nor its owner will be responsible in such cases.")
       await ctx.channel.send(embed =em )
 
 
@@ -385,7 +385,7 @@ class Bot(commands.Bot):
       em = discord.Embed(title= "Toss between two things",description= "Are you confused selecting in between two things? Here, use this.  ",color = 0x4e23c4)
       em.add_field(name = "Syntax",value = "```$toss Option 1 or Option 2```",inline = False)
       em.add_field(name = "Example",value = "```$toss Play football or Watch tv```",inline= False)
-      em.add_field(name = "Warning",value = "Either Option 1 or Option 2 is selected randomly by the bot .Please do not consider taking any important decisions based on this, the bot nor its owner is not responsible in such cases.")
+      em.add_field(name = "Warning",value = "Either Option 1 or Option 2 is selected randomly by the bot .Please do not consider taking any important decisions based on this, neither the bot nor its owner will be responsible in such cases.")
       await ctx.channel.send(embed =em )
 
 
