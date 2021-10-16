@@ -252,7 +252,7 @@ class Bot(commands.Bot):
         colour = 0x7CFC00)
         embedVar.add_field(name= "Players get ready to **Gamble**",value = 
           f"The one who wins gets all the betted money , and the participants lose the amount they had betted. If no one wins ,no one loses or gains money",inline = False)
-        embedVar.add_field(name = "Instructions to set your bet :)",value= "You have **20 seconds** !Give your bets in the format !bet <amount to bet> <number on which you want to bet(0,9)>")
+        embedVar.add_field(name = "Instructions to set your bet :)",value= "You have **20 seconds** !Give your bets in the format ```!bet <amount to bet> <number on which you want to bet(0,9)>```")
         embedVar.set_thumbnail(url="https://cdn.discordapp.com/attachments/895902833315041280/896396326198181938/512x512bb.jpg")
         await ctx.channel.send(embed = embedVar)
         total_bet = 0
