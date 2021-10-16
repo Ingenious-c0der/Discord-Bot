@@ -4,3 +4,7 @@ motor
 dnspython
 nums-from-string
 discord-components
+re
+selenium
+beautifulsoup4
+webdriver-manager
