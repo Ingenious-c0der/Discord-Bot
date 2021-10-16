@@ -21,7 +21,7 @@ class Web:
         results = []
         driver.get(fr"http://google.com/complete/search?output=toolbar&q={new_req}")
         content = driver.page_source
-        soup = BeautifulSoup(content,features="lxml")
+        soup = BeautifulSoup(content)
         for res in soup.findAll('completesuggestion'):
             results.append(re.findall(r'"([^"]*)"', str(res)))
         return results
