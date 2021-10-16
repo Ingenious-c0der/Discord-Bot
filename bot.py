@@ -273,7 +273,7 @@ class Bot(commands.Bot):
             await Accounts.manage_account(int(winner[0]),total_bet-winner[1])
             for bet in net_list:
               if bet[0]!= winner[0]:
-                await Accounts.manage_account(int(bet[0]),-bet[2])
+                await Accounts.manage_account(int(bet[0]),-bet[1])
             Bot.gamble_dict.pop(ctx.channel,None)
             
           else:
