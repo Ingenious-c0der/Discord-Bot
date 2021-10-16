@@ -5,6 +5,7 @@ import discord
 import nums_from_string
 from discord_components import Button,ButtonStyle,DiscordComponents 
 from mongo_functions import ScrambleStats, WpmStats,Accounts,Words
+from web import Web
 import os
 from dotenv import load_dotenv
 
@@ -312,6 +313,17 @@ class Bot(commands.Bot):
        embedVar.add_field(name=f"**Made it to the leaderboard 🌟 :{ await bot.fetch_user(int(top_list[4]['_id']))}** ",value=f"**balance** : {top_list[4]['amount']} flamecoins", inline=False)
        await ctx.channel.send(embed=embedVar)
 
+    
+    @bot.command()
+    async def google(ctx,*args):
+      results = await Web.get_google_predictions(" ".join(args))
+      em = discord.Embed(title=f"Search Suggestions for {' '.join(args)}",color=0x7aff6e)
+      em.add_field(
+        name= "Top 5 results",
+        value = f"1.```{results[0]}```\n2.```{results[1]}```\n3.```{results[2]}```\n4.```{results[3]}```\n5.```{results[4]}```"
+      )
+      em.set_footer(text = "Brought to you by Google Api",icon_url="https://cdn.discordapp.com/attachments/898553997810626620/898886456288899102/image-20150902-6700-t2axrz.png")
+      await ctx.channel.send(embed =em)
 
 
 
@@ -328,7 +340,7 @@ class Bot(commands.Bot):
       em = discord.Embed(title = "Help",description = "Use ```$help <command>``` for extended information about a particular command",color = 0x4e23c4)
       em.add_field(name = "Utility   ",value = "```•wpmrace\n•scramble\n•gamble\n•donate```",inline = True)
       em.add_field(name = "Information",value = "```•wpmstats\n•balancestats\n•balance\n•scramblestats```",inline = True )
-      em.add_field(name = "Fun",value = "```•choice\n•toss```",inline = True)
+      em.add_field(name = "Fun",value = "```•choice\n•toss\n.google```",inline = True)
       em.set_thumbnail(url="https://cdn.discordapp.com/avatars/827131558984810507/f2b9e7828a270b2f0f034b41dd073c60.png?size=1024")
       em.set_footer(text='Bot developed by Ingenious#3023',icon_url="https://cdn.discordapp.com/avatars/297693029563760651/55c5c4064de5e426076bafdcddee0dd9.png?size=1024") 
       await ctx.channel.send(embed =em )
@@ -414,9 +426,18 @@ class Bot(commands.Bot):
       em.add_field(name = "Example",value = "```$scramblestats\n$scramblestats @Ingenious```",inline=False)
       await ctx.channel.send(embed =em )
 
+    @help.command()
+    async def google(ctx):
+      em = discord.Embed(title= "Get google top predictive searches",description= "Want to laugh at funny google auto completes? ",color = 0x4e23c4)
+      em.add_field(name = "Syntax",value = "```$google <incomplete search>```",inline = False)
+      em.add_field(name = "Example",value = "```$google how to ```",inline=False)
+      await ctx.channel.send(embed =em )
+
+
 
 
 load_dotenv()
 bot.run(os.environ.get("TOKEN"))
+
 
 
