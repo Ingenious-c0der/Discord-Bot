@@ -238,8 +238,9 @@ class Bot(commands.Bot):
       def check(m):
           if m.channel == ctx.channel and m.author.id not in player_list and m.content.startswith("!bet")  and len(m.content.split(" "))==3 and len(nums_from_string.get_nums(m.content))==2:
               this = m.content.split(" ")
-              player_list.append(m.author.id)
-              net_list.append((m.author.id,int(this[1]),int(this[2])))
+              if int(this[1])>0:
+                player_list.append(m.author.id)
+                net_list.append((m.author.id,int(this[1]),int(this[2])))
           return False
       player_list = []
       net_list = []
@@ -273,7 +274,7 @@ class Bot(commands.Bot):
             await Accounts.manage_account(int(winner[0]),total_bet-winner[1])
             for bet in net_list:
               if bet[0]!= winner[0]:
-                await Accounts.manage_account(int(bet[0]),-bet[1])
+                await Accounts.manage_account(int(bet[0]),-int(bet[1]))
             Bot.gamble_dict.pop(ctx.channel,None)
             
           else:
