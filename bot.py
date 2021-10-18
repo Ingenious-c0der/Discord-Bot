@@ -86,7 +86,7 @@ class Bot(commands.Bot):
       if ctx.channel in Bot.pending_scramble_word:
          Bot.pending_scramble_word[ctx.channel].close()
       word = await  Words.get_word()
-      print(word)
+      
       Bot.scramble_solution = word
       scramble_list = list(word)
       random.shuffle(scramble_list)
@@ -350,7 +350,7 @@ class Bot(commands.Bot):
     async def wpmrace(ctx):
       em = discord.Embed(title= "Wpmrace",description= "Think you are an fast typer? Try wpm racing with your friends using this command.First one to type the given word out correctly wins!",color = 0x4e23c4)
       em.add_field(name = "Syntax",value = "```$wpmrace```",inline = False)
-      em.add_field(name = "Reward",value = "You will be rewarded 500 flamecoins if your typing speed in 3+ characters per second",inline= False)
+      em.add_field(name = "Reward",value = "You will be rewarded 500 flamecoins if your typing speed is 3+ characters per second",inline= False)
       await ctx.channel.send(embed =em )
     
     @help.command()
