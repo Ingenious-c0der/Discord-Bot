@@ -99,8 +99,9 @@ class Bot(commands.Bot):
       async def on_button_click(interaction):
             
             if interaction.channel in Bot.pending_scramble_word:
-              this_word =Bot.context_scramble_word[interaction.channel]
-              await interaction.send(content=f"Ah dumb people ,The first half of the word is {this_word[0:int(len(this_word)/2)]}")
+              this_word = Bot.context_scramble_word[interaction.channel]
+              await Accounts.manage_account(interaction.user.id,-100)
+              await interaction.send(content=f"Ah dumb people ,The first half of the word is **{this_word[0:int(len(this_word)/2)]}**\nYou have spent 100 flamecoins for the hint!")
             else:
               await interaction.send(content = "Hmm , looks like this word has expired by now")
       def check(m):
