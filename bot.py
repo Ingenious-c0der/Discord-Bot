@@ -318,13 +318,24 @@ class Bot(commands.Bot):
     @bot.command()
     async def google(ctx,*args):
       results = await Web.get_google_predictions(" ".join(args))
-      em = discord.Embed(title=f"Search Suggestions for {' '.join(args)}",color=0x7aff6e)
-      em.add_field(
-        name= "Top 5 results",
-        value = f"1.```{results[0]}```\n2.```{results[1]}```\n3.```{results[2]}```\n4.```{results[3]}```\n5.```{results[4]}```"
-      )
-      em.set_footer(text = "Brought to you by Google Api",icon_url="https://cdn.discordapp.com/attachments/898553997810626620/898886456288899102/image-20150902-6700-t2axrz.png")
-      await ctx.channel.send(embed =em)
+      try:
+        em = discord.Embed(title=f"Search Suggestions for {' '.join(args)}",color=0x7aff6e)
+        em.add_field(
+          name= "Top 5 results",
+          value = f"1.```{results[0]}```\n2.```{results[1]}```\n3.```{results[2]}```\n4.```{results[3]}```\n5.```{results[4]}```"
+        )
+        em.set_footer(text = "Brought to you by Google Api",icon_url="https://cdn.discordapp.com/attachments/898553997810626620/898886456288899102/image-20150902-6700-t2axrz.png")
+        await ctx.channel.send(embed =em)
+      except:
+        em = discord.Embed(title=f"Search Suggestions for {' '.join(args)}",color=0x7aff6e)
+        em.add_field(
+          name= "Oops looks like there weren't many matching results.These are all results",
+          value = f"```{results}```"
+        )
+        em.set_footer(text = "Brought to you by Google Api",icon_url="https://cdn.discordapp.com/attachments/898553997810626620/898886456288899102/image-20150902-6700-t2axrz.png")
+        await ctx.channel.send(embed =em)
+        
+        
 
 
 
