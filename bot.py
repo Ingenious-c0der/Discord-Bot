@@ -1,3 +1,4 @@
+from PIL.ImageDraw import Draw
 from discord.ext import commands
 import random 
 import time
@@ -6,9 +7,10 @@ import nums_from_string
 from discord_components import Button,ButtonStyle,DiscordComponents 
 from mongo_functions import ScrambleStats, WpmStats,Accounts,Words
 from web import Web
+from nodes import DrawNodes
 import os
 from dotenv import load_dotenv
-
+import io 
 
 
 
@@ -31,6 +33,7 @@ class Bot(commands.Bot):
     pending_scramble_word = dict()
     context_scramble_word =dict()
     gamble_dict = dict()
+    node_dict = dict()
    
 
 
@@ -334,7 +337,40 @@ class Bot(commands.Bot):
         )
         em.set_footer(text = "Brought to you by Google Api",icon_url="https://cdn.discordapp.com/attachments/898553997810626620/898886456288899102/image-20150902-6700-t2axrz.png")
         await ctx.channel.send(embed =em)
-        
+    
+    @bot.command()
+    async def node(ctx):
+      def check(m):
+          return str(m.content)==str(node_pack[2]) and m.channel == ctx.channel
+      if ctx.channel in Bot.node_dict:
+        await ctx.channel.send(f"Hey <@{ctx.message.author.id}> slow down! A node-solve is already in Progress!")
+      else:
+        Bot.node_dict[ctx.channel]= "occupied"
+        try: 
+            node_pack = await DrawNodes.drawer()
+            image = node_pack[0]
+
+            with io.BytesIO() as image_binary:
+                image.save(image_binary, 'PNG')
+                image_binary.seek(0)
+                embed = discord.Embed(title="Node solving", description=f"Find the shortest distance (path length) between \nthe nodes **{node_pack[1][0]}** and **{node_pack[1][1]}**.You have 200 seconds", color=0x00ff00) #creates embed
+                file = discord.File(fp=image_binary, filename='node.png')
+            embed.set_image(url="attachment://node.png")
+            await ctx.channel.send(file=file, embed=embed)
+            t1 = time.time()
+            ans = await bot.wait_for('message',check = check , timeout = 200)
+            t2 = time.time()
+            await ctx.channel.send(f"<@{ans.author.id}> solved it right !. Solved it in {round(t2-t1,3)} seconds.")
+            if t2-t1<20:
+                await Accounts.manage_account(ans.author.id)
+            Bot.node_dict.pop(ctx.channel,None)
+        except:
+            await ctx.channel.send(f"Node solve timeout! the shortest path length was {node_pack[2]}")
+            Bot.node_dict.pop(ctx.channel,None)
+    
+
+      
+
         
 
 
@@ -350,12 +386,21 @@ class Bot(commands.Bot):
     async def help(ctx):
       
       em = discord.Embed(title = "Help",description = "Use ```$help <command>``` for extended information about a particular command",color = 0x4e23c4)
-      em.add_field(name = "Utility   ",value = "```•wpmrace\n•scramble\n•gamble\n•donate```",inline = True)
+      em.add_field(name = "Utility   ",value = "```•wpmrace\n•scramble\n•gamble\n•node\n•donate```",inline = True)
       em.add_field(name = "Information",value = "```•wpmstats\n•balancestats\n•balance\n•scramblestats```",inline = True )
       em.add_field(name = "Fun",value = "```•choice\n•toss\n.google```",inline = True)
       em.set_thumbnail(url="https://cdn.discordapp.com/avatars/827131558984810507/f2b9e7828a270b2f0f034b41dd073c60.png?size=1024")
       em.set_footer(text='Bot developed by Ingenious#3023',icon_url="https://cdn.discordapp.com/avatars/297693029563760651/55c5c4064de5e426076bafdcddee0dd9.png?size=1024") 
       await ctx.channel.send(embed =em )
+    
+    @help.command()
+    async def node(ctx):
+      em = discord.Embed(title= "Node",description= "Want to test out your quick calculation skills?",color = 0x4e23c4)
+      em.add_field(name="information",value = "You will be given a structure of nodes with different path values connecting different nodes.Your job is to calculate the shortest path between the mentioned 2 nodes.")
+      em.add_field(name = "Syntax",value = "```$node```",inline = False)
+      em.add_field(name = "Reward",value = "You will be rewarded 1000 flamecoins if you solve the node problem in less than 20 seconds",inline= False)
+      await ctx.channel.send(embed =em )
+
 
 
     @help.command()
