@@ -3,7 +3,6 @@ import random
 import sys
 import string
 
-import PIL
 class Graph():
  
     def __init__(self, vertices,graph):
