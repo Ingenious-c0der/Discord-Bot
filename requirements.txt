@@ -8,3 +8,4 @@ regex
 selenium
 beautifulsoup4
 webdriver-manager
+pillow
