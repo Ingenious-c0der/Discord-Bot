@@ -2,6 +2,7 @@ from PIL import Image, ImageDraw, ImageFont
 import random
 import sys
 import string
+import os
 
 class Graph():
  
