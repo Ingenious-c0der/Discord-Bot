@@ -1,9 +1,11 @@
+from _typeshed import Self
+import os
 from PIL import Image, ImageDraw, ImageFont
 import random
 import sys
 import string
-import os
-
+import PIL
+import asyncio
 class Graph():
  
     def __init__(self, vertices,graph):
@@ -51,15 +53,13 @@ class DrawNodes:
         Returns : tuple (pil image,(node1,node2),shortest_distance)
         """
         base_image = Image.open(os.path.join(os.getcwd(),"node_structure.png"))
-
         font = ImageFont.truetype("OpenSans-Regular.ttf", 35)
-    
         draw_object = ImageDraw.Draw(base_image)
         letter_list=random.sample(string.ascii_uppercase,7)
     
         #node names
-        pre_nodes = [0,1,2,3]
-        post_nodes = [5,6]
+        pre_nodes = [0,1,2]
+        post_nodes = [4,5,6]
         nodes = [random.choice(pre_nodes) ,random.choice(post_nodes)]
         node_color = (255,0,0)       
         value_color = (0,255,0)    
@@ -73,7 +73,7 @@ class DrawNodes:
 
 
         #node values
-        generated_values = [str(random.randint(20,23)) for i in range(12)]
+        generated_values = x = [str(random.choice([197,145,189,123,144,146,"X"])) for i in range(12)]
         v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12 = generated_values
         draw_object.multiline_text((80,180), v1, font=font, fill=value_color)
         draw_object.multiline_text((100,100), v2, font=font, fill=value_color)
@@ -88,7 +88,15 @@ class DrawNodes:
         draw_object.multiline_text((632.5,187.5), v11, font=font, fill=value_color)
         draw_object.multiline_text((450,295), v12, font=font, fill=value_color)
 
-        v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12 = [int(i) for i in generated_values]
+        safe_list = []
+        for i in generated_values:
+            if i=="X":
+                safe_list.append(0)
+            else:
+                safe_list.append(int(i))
+
+
+        v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12 = safe_list
         g = Graph(7,[[0,v2,v1,v3,0,0,0],
             [v2,0,v5,v4,0,0,0],
             [v1,v5,0,v6,v7,0,0],
@@ -98,8 +106,5 @@ class DrawNodes:
             [0,0,0,v10,0,v11,0]])
         shortest_dist =  await g.dijkstra(nodes[0],nodes[1])
         return (base_image,(letter_list[nodes[0]],letter_list[nodes[1]]),shortest_dist)
-
-
-
 
 
