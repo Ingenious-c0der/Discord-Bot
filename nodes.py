@@ -52,7 +52,7 @@ class DrawNodes:
         """
         base_image = Image.open(os.path.join(os.getcwd(),"node_structure.png"))
 
-        font = ImageFont.load_default()
+        font = ImageFont.truetype("OpenSans-Regular.ttf", 35)
     
         draw_object = ImageDraw.Draw(base_image)
         letter_list=random.sample(string.ascii_uppercase,7)
