@@ -50,7 +50,7 @@ class DrawNodes:
         Args : None
         Returns : tuple (pil image,(node1,node2),shortest_distance)
         """
-        base_image = Image.open(os.path.join(os.getcwd(),r"node_images\node_structure.png"))
+        base_image = Image.open(os.path.join(os.getcwd(),"node_structure.png"))
 
         font = ImageFont.truetype("arial.ttf", 35)
     
