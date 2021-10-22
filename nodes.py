@@ -1,4 +1,4 @@
-from _typeshed import Self
+
 import os
 from PIL import Image, ImageDraw, ImageFont
 import random
