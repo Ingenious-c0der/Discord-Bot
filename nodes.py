@@ -73,7 +73,7 @@ class DrawNodes:
 
 
         #node values
-        generated_values = x = [str(random.choice([197,145,189,123,144,146,"X"])) for i in range(12)]
+        generated_values = x = [str(random.choice([1,197,145,189,123,144,146,"X"])) for i in range(12)]
         v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12 = generated_values
         draw_object.multiline_text((80,180), v1, font=font, fill=value_color)
         draw_object.multiline_text((100,100), v2, font=font, fill=value_color)
