@@ -4,8 +4,7 @@ from PIL import Image, ImageDraw, ImageFont
 import random
 import sys
 import string
-import PIL
-import asyncio
+
 class Graph():
  
     def __init__(self, vertices,graph):
@@ -16,18 +15,21 @@ class Graph():
 
 
     async def minDistance(self, dist, sptSet):
- 
+        
         min = sys.maxsize
- 
+        
+        
         for v in range(self.V):
+       
             if dist[v] < min and sptSet[v] == False:
                 min = dist[v]
                 min_index = v
+     
  
         return min_index
  
     async def dijkstra(self, src , end):
- 
+        
         dist = [sys.maxsize] * self.V
         dist[src] = 0
         sptSet = [False] * self.V
@@ -73,7 +75,13 @@ class DrawNodes:
 
 
         #node values
-        generated_values = x = [str(random.choice([1,197,145,189,123,144,146,"X"])) for i in range(12)]
+        generated_values =  [str(random.choice([197,145,189,123,144,146,"X"])) for i in range(12)]
+        while generated_values.count("X")>=5:
+            generated_values =  [str(random.choice([197,145,189,123,144,146,"X"])) for i in range(12)]
+        for i in [1,4,6,8,9]: #make sure every node has atleast one connecting path and is not crossed
+            generated_values[i] = str(random.choice([197,145,189,123,144,146,204]))
+
+     
         v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12 = generated_values
         draw_object.multiline_text((80,180), v1, font=font, fill=value_color)
         draw_object.multiline_text((100,100), v2, font=font, fill=value_color)
@@ -97,6 +105,7 @@ class DrawNodes:
 
 
         v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12 = safe_list
+        print(safe_list.count(0), safe_list)
         g = Graph(7,[[0,v2,v1,v3,0,0,0],
             [v2,0,v5,v4,0,0,0],
             [v1,v5,0,v6,v7,0,0],
@@ -106,5 +115,7 @@ class DrawNodes:
             [0,0,0,v10,0,v11,0]])
         shortest_dist =  await g.dijkstra(nodes[0],nodes[1])
         return (base_image,(letter_list[nodes[0]],letter_list[nodes[1]]),shortest_dist)
+
+
 
 
