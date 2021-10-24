@@ -75,11 +75,11 @@ class DrawNodes:
 
 
         #node values
-        generated_values =  [str(random.choice([197,145,189,123,144,146,"X"])) for i in range(12)]
+        generated_values =  [str(random.choice([1,197,145,189,123,144,146,"X"])) for i in range(12)]
         while generated_values.count("X")>=5:
-            generated_values =  [str(random.choice([197,145,189,123,144,146,"X"])) for i in range(12)]
+            generated_values =  [str(random.choice([1,197,145,189,123,144,146,"X"])) for i in range(12)]
         for i in [1,4,6,8,9]: #make sure every node has atleast one connecting path and is not crossed
-            generated_values[i] = str(random.choice([197,145,189,123,144,146,204]))
+            generated_values[i] = str(random.choice([1,197,145,189,123,144,146,204]))
 
      
         v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12 = generated_values
