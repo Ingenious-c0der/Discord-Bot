@@ -5,9 +5,9 @@ import time
 import discord
 import nums_from_string
 from discord_components import Button,ButtonStyle,DiscordComponents 
-from mongo_functions import ScrambleStats, WpmStats,Accounts,Words
-from web import Web
-from nodes import DrawNodes
+from utils.mongo_functions import ScrambleStats, WpmStats,Accounts,Words
+from utils.web import Web
+from utils.nodes import DrawNodes
 import os
 from dotenv import load_dotenv
 import io 
