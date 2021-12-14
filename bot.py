@@ -369,8 +369,8 @@ class Bot(commands.Bot):
             await ctx.channel.send(f"Node solve timeout! the shortest path length was {node_pack[2]}")
             Bot.node_dict.pop(ctx.channel,None)
             
-     @bot.command()       
-     async def gpt3(ctx,*arg)->str:
+    @bot.command()       
+    async def gpt3(ctx,*arg)->str:
         question = ' '.join(arg)
         response =  completion.create(
                 prompt=question, engine="davinci", stop=['\nHuman'], temperature=0.9,
