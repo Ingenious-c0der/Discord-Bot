@@ -11,10 +11,11 @@ from utils.nodes import DrawNodes
 import os
 from dotenv import load_dotenv
 import io 
+import openai
 
 
-
-
+openai.api_key = os.environ.get("OPEN_AI_KEY")
+completion = openai.Completion()
 
 intents = discord.Intents.default()
 intents.members = True
@@ -367,6 +368,16 @@ class Bot(commands.Bot):
         except:
             await ctx.channel.send(f"Node solve timeout! the shortest path length was {node_pack[2]}")
             Bot.node_dict.pop(ctx.channel,None)
+            
+     @bot.command()       
+     async def gpt3(ctx,*arg)->str:
+        question = ' '.join(arg)
+        response =  completion.create(
+                prompt=question, engine="davinci", stop=['\nHuman'], temperature=0.9,
+                top_p=1, frequency_penalty=0, presence_penalty=0.6, best_of=1,
+                max_tokens=150)
+        
+        await ctx.channel.send(response["choices"][0]["text"])
     
 
       
