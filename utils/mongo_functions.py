@@ -1,11 +1,11 @@
 import ssl
 import motor 
-from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
+import motor.motor_asyncio
 import random 
 from dotenv import load_dotenv
 import os 
 load_dotenv()
-Mongo_Client =motor.motor_asyncio.AsyncIOMotorClient(fr"{os.environ.get('CONNECTION_STRING')}",ssl_cert_reqs=ssl.CERT_NONE, serverSelectionTimeoutMS=5000)
+Mongo_Client =motor.motor_asyncio.AsyncIOMotorClient(fr"{os.environ.get('CONNECTION_STRING')}", serverSelectionTimeoutMS=5000)
 db = Mongo_Client.get_database('Bot_data')
 
 

@@ -19,7 +19,7 @@ completion = openai.Completion()
 
 intents = discord.Intents.default()
 intents.members = True
-bot = discord.ext.commands.Bot("$",intents = intents)
+bot = commands.Bot(command_prefix="$",intents = intents)
 bot.remove_command("help")
 DiscordComponents(bot)
 @bot.event
@@ -505,7 +505,7 @@ class Bot(commands.Bot):
 
 
 load_dotenv()
-bot.run(os.environ.get("TOKEN"))
+bot.run(os.environ.get("BOT_TOKEN"))
 
 
 
