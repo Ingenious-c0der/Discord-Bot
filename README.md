@@ -1,5 +1,6 @@
 # Discord-Bot
 Multipurpose discord bot with various features.
+The bot is no longer hosted on any platform due to lack of extended free tier services from any platform (like heroku offered in the past). If you want to get it running, you can clone it and set up the env yourself, the collections used in the db are given below
 
 
 ## Mongo DB Collection Schemas  
