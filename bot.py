@@ -491,6 +491,7 @@ class Bot(commands.Bot):
 
 
 load_dotenv()
+
 bot.run(os.environ.get("BOT_TOKEN"))
 
 
